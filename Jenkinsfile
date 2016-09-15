@@ -3,11 +3,15 @@ def coreName = 'wb_sdram_ctrl';
 
 stage 'Determine required patched'
 node {
+    sh "exit 1"
+    
     // Now we take only one repo, but maybe we need more ones later
     checkout scm
     sh 'git rev-parse HEAD > GIT_COMMIT'
     commitId = readFile('GIT_COMMIT')
 }
+
+
 
 node('docker-fusesoc-icarus') {
     stage "Patch orpsoc-cores registry"
